@@ -80,7 +80,7 @@ function centos1_ntp(){
 }
 function centos2_ocserv(){
 yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
-yum install ocserv httpd -y
+yum install ocserv -y # httpd -y
 yum install radiusclient-ng -y
 mkdir /root/anyconnect
 cd /root/anyconnect
