@@ -1,5 +1,6 @@
 #!/bin/bash
 function set_shell_input1() {
+	#read -p 'Password: ' sqladmin
 	sqladmin=0p0o0i0900
 	yum install lynx -y
 	public_ip=`lynx --source www.monip.org | sed -nre 's/^.* (([0-9]{1,3}\.){3}[0-9]{1,3}).*$/\1/p'`
@@ -46,9 +47,9 @@ function set_freeradius3(){
 }
 function set_daloradius4(){
 	cd /var/www/html/
-	wget http://180.188.197.212/down/daloradius-0.9-9.tar.gz >/dev/null 2>&1
-	tar xzvf daloradius-0.9-9.tar.gz
-	mv daloradius-0.9-9 daloradius
+	wget https://github.com/lirantal/daloradius/archive/1.1-2.tar.gz >/dev/null 2>&1
+	tar xzvf 1.1-2.tar.gz
+	mv 1.1-2 daloradius
 	chown -R apache:apache /var/www/html/daloradius/
 	chmod 664 /var/www/html/daloradius/library/daloradius.conf.php
 	cd /var/www/html/daloradius/
@@ -107,9 +108,9 @@ Listen 9090
 " >> /etc/httpd/conf/httpd.conf
 cd /var/www/html/
 rm -rf *
-wget http://180.188.197.212/down/daloradius20180418.tar.gz 
-tar xzvf daloradius20180418.tar.gz
-rm -rf daloradius20180418.tar.gz
+wget https://github.com/lirantal/daloradius/archive/1.1-2.tar.gz 
+tar xzvf 1.1-2.tar.gz.tar.gz
+rm -rf 1.1-2.tar.gz.tar.gz
 chown -R apache:apache /var/www/html/daloradius
 service httpd restart
 sed -i "s/mysql/mysqli/g" /var/www/html/daloradius/library/daloradius.conf.php
