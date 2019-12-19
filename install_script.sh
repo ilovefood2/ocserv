@@ -67,9 +67,9 @@ function centos1_ntp(){
 	sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
 	yum -y install ntp
 	service ntpd restart
-	cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+	cp -rf /usr/share/zoneinfo/Canada/Eastern /etc/localtime
 	cd /root
-	echo '0-59/10 * * * * /usr/sbin/ntpdate -u cn.pool.ntp.org' >> /tmp/crontab.back
+	echo '0-59/10 * * * * /usr/sbin/ntpdate -u ca.pool.ntp.org' >> /tmp/crontab.back
 	crontab /tmp/crontab.back
 	systemctl restart crond
 	yum install net-tools -y
@@ -128,12 +128,12 @@ cp crl.pem /etc/ocserv/
 #配置 ocserv
 cd /etc/ocserv/
 rm -rf ocserv.conf
-wget https://raw.githubusercontent.com/chendong12/ocserv/master/ocserv.conf
+wget https://raw.githubusercontent.com/ilovefood2/ocserv/master/ocserv.conf
 #
 cd /root/anyconnect
-wget https://raw.githubusercontent.com/chendong12/ocserv/master/gen-client-cert.sh
-wget https://raw.githubusercontent.com/chendong12/ocserv/master/user_add.sh
-wget https://raw.githubusercontent.com/chendong12/ocserv/master/user_del.sh
+wget https://raw.githubusercontent.com/ilovefood2/ocserv/master/gen-client-cert.sh
+wget https://raw.githubusercontent.com/ilovefood2/ocserv/master/user_add.sh
+wget https://raw.githubusercontent.com/ilovefood2/ocserv/master/user_del.sh
 chmod +x gen-client-cert.sh
 chmod +x user_add.sh
 chmod +x user_del.sh
@@ -153,8 +153,8 @@ iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A INPUT -p icmp -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 iptables -I INPUT -p tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp --dport 4433 -j ACCEPT
-iptables -A INPUT -p udp --dport 4433 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+iptables -A INPUT -p udp --dport 443 -j ACCEPT
 iptables -A INPUT -j DROP
 iptables -t nat -F
 iptables -t nat -A POSTROUTING -s 10.12.0.0/24 -o eth0 -j MASQUERADE
