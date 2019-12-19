@@ -145,7 +145,7 @@ sysctl -p
 chmod +x /etc/rc.d/rc.local
 cat >>  /etc/rc.d/rc.local <<EOF
 service ocserv start
-service httpd start
+#service httpd start
 echo 1 > /proc/sys/net/ipv4/ip_forward
 iptables -F
 iptables -A INPUT -i lo -j ACCEPT
